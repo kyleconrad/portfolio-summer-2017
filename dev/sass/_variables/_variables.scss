@@ -16,6 +16,16 @@ $mobileSmallSize: 325px;
 // FONTS
 $base-value: 16;
 
+@font-face {
+    font-family: 'onramp';
+    src: url('/fonts/onramp-webfont.woff2') format('woff2'),
+         url('/fonts/onramp-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-primary: 'onramp', sans-serif;
+
 
 
 // CSS VARIABLES
