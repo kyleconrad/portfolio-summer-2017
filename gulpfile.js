@@ -65,9 +65,7 @@ gulp.task('html-watch', ['html-build'], function (done) {
 gulp.task('sass', function() {
     return gulp.src('./static/sass/*.scss')
 	    .pipe(sourcemaps.init())
-        .pipe(sass({
-        	errLogToConsole: true
-        }))
+        .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dev/css'))
         .pipe(browserSync.stream());

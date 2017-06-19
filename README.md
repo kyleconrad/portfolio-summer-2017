@@ -5,7 +5,6 @@ Running local set up will install all necessary bundles and dependencies and the
     
     $ cd Summer\ 2017\ Design
     $ npm install
-    $ bundle install
     $ gulp
 
 ## Building

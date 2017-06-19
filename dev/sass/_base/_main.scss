@@ -1,0 +1,47 @@
+/* MAIN */
+
+// CSS VARIABLES
+@if($css4) {
+	:root {
+		@each $variable, $value in $css-variables {
+			#{$variable}: $value;
+		}
+	}
+}
+
+
+
+* {
+   	@include box-sizing(border-box);
+
+
+   	&:before,
+   	&:after {
+   		@include box-sizing(border-box);
+   	}
+}
+
+
+
+html {
+	min-height: 100%;
+	height: 100%;
+	-webkit-text-size-adjust: none;
+}
+
+
+
+body {
+	height: 100%;
+	width: 100%;
+	position: relative;
+	overflow-x: hidden;
+
+	background: black;
+
+	--screen-large: $largeSize;
+	--screen-landscape: $landscapeSize;
+	--screen-portrait: $portraitSize;
+	--screen-mobile: $mobileSize;
+	--screen-mobile-small: $mobileSmallSize;
+}
