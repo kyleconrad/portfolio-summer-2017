@@ -1,0 +1,17 @@
+{
+  "name": "PortfolioSummer2017",
+  "version": "0.0.1",
+  "description": "Kyle Conrad's portfolio redesign for Summer 2017.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kyle Conrad <kyle@kyleconrad.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kyleconrad/portfolio-summer-2017"
+  },
+  "devDependencies": {
+  },
+  "dependencies": {
+  }
+}
