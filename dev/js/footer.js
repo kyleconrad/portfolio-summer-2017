@@ -64,9 +64,17 @@ $(document).ready(function() {
 	mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZWNvbnJhZCIsImEiOiJjajI4MWdhc2swMGw5MzJtbWp4ZmV2aWppIn0.wy3_dCqTbd2w33Kw9me8tw';
 	var map = new mapboxgl.Map({
 	    container: 'map',
-	    style: 'mapbox://styles/kyleconrad/cj281oep9000i2sn00o4hhibj?optimize=true',
+	    style: 'mapbox://styles/kyleconrad/cj44c4fds0jz32rm3gqr9p7ji?optimize=true',
 	    interactive: false,
 	    center: [-83.247,34.998],
 	    zoom: 13
 	});
+
+	var mapLoaded = setInterval( function() {
+		if ( map.loaded() ) {
+			document.getElementById( 'map' ).classList.add( 'loaded');
+
+			clearInterval( mapLoaded );
+		}
+	}, 10);
 });

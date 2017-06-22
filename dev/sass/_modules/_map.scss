@@ -11,6 +11,10 @@
 
 	pointer-events: none;
 
+	opacity: 0;
+
+	transition: 0.15s;
+
 
 	&.mapboxgl-map {
 		position: fixed;
@@ -18,5 +22,10 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
+
+		opacity: 0;
+	}
+	&.loaded {
+		opacity: 0.5;
 	}
 }
