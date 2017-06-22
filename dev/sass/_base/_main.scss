@@ -37,11 +37,22 @@ body {
 	position: relative;
 	overflow-x: hidden;
 
-	background: black;
-
 	--screen-large: $largeSize;
 	--screen-landscape: $landscapeSize;
 	--screen-portrait: $portraitSize;
 	--screen-mobile: $mobileSize;
 	--screen-mobile-small: $mobileSmallSize;
+}
+
+
+
+main,
+nav,
+header,
+article,
+footer,
+section,
+div {
+	display: block;
+	position: relative;
 }

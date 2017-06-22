@@ -1,2 +1,71 @@
 /* HEADER */
 
+.hero {
+	@include display(flex);
+	@include flex-direction(column);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(center);
+
+	height: 100vh;
+
+
+	&:before {
+		display: block;
+
+		position: absolute;
+		left: 0;
+		top: 0;
+
+		width: 50%;
+		height: 120%;
+
+		background: url('/images/patterns/pattern_wave.png');
+		background-size: 20px auto;
+
+		mix-blend-mode: multiply;
+
+		opacity: 0.25;
+
+		// @include filter();
+
+		content: '';
+	}
+}
+
+.hero__title {
+	@include display(flex);
+	@include flex-direction(column);
+	@include flex-wrap(nowrap);
+	@include justify-content(space-between);
+	@include align-items(stretch);
+
+	height: 30%;
+
+	@include transform(rotate(-90deg));
+
+
+	&:before,
+	&:after {
+		display: block;
+
+		position: absolute;
+		top: 50%;
+		left: 50%;
+
+		@include css4 {
+			width: calc( var(--space) * 1.5 );
+		}
+		height: 1px;
+
+		background: $gray;
+
+		content: '';
+	}
+	&:before {
+		@include transform(translate(-50%,-50%) rotate(45deg));
+	}
+	&:after {
+		@include transform(translate(-50%,-50%) rotate(-45deg));
+	}
+}

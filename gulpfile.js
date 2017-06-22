@@ -63,7 +63,7 @@ gulp.task('html-watch', ['html-build'], function (done) {
 
 // Run SASS compiling and reloading
 gulp.task('sass', function() {
-    return gulp.src('./static/sass/*.scss')
+    return gulp.src('./dev/sass/*.scss')
 	    .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())

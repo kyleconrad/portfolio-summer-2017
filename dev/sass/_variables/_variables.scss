@@ -10,6 +10,7 @@ $mobileSmallSize: 325px;
 
 
 // COLORS
+$gray: #1A1A1A;
 
 
 
@@ -24,8 +25,6 @@ $base-value: 16;
     font-style: normal;
 }
 
-$font-primary: 'onramp', sans-serif;
-
 
 
 // CSS VARIABLES
@@ -33,5 +32,5 @@ $css4: true;
 $compatibility: true;
 
 $css-variables: (
-	--column-padding: 5vw
+	--space: 2vw
 );

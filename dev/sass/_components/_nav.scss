@@ -1,1 +1,70 @@
 /* NAV */
+
+nav {
+	position: fixed;
+
+	@include css4 {
+		top: var(--space);
+		right: var(--space);
+		bottom: var(--space);
+		left: var(--space);
+
+		padding: var(--space);
+	}
+
+	border: 1px solid $gray;
+
+	pointer-events: none;
+}
+
+.nav__menu {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(space-between);
+	@include align-items(stretch);
+}
+
+.nav__menu-logo {
+	@include css4 {
+		height: calc( var(--space) * 2 );
+		width: calc( var(--space) * 2 );
+	}
+
+	padding: 0.25em;
+
+	background: $gray;
+}
+
+.nav__menu-right {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(stretch);
+
+	&:before {
+		display: block;
+
+		position: absolute;
+		left: 0;
+		bottom: 0;
+
+		width: 50vw;
+		height: 1px;
+
+		background: $gray;
+
+		content: '';
+	}
+}
+
+.nav__menu-right__container {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(center);
+
+	overflow: hidden;
+}

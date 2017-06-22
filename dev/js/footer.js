@@ -1,0 +1,72 @@
+$(document).ready(function() {
+	var windowWidth = $(window).width(),
+		windowHeight = $(window).height();
+	var $body = document.getElementsByTagName( 'body' )[0];
+	var isMobile = navigator.userAgent.match(/mobile/i),
+		isDesktop;
+
+
+
+	// Mobile / Desktop Classes & Checks
+	if ( isMobile ) {
+		$body.classList.add( 'mobile' );
+	}
+	else if ( !isMobile ) {
+		$body.classList.add( 'desktop' );
+	}
+
+
+
+	// Safari Font Fix
+	// based on http://stackoverflow.com/a/31842229
+	safariFontFix();
+
+	function safariFontFix() {
+		var is_chrome = navigator.userAgent.indexOf( 'Chrome' ) > -1,
+			is_explorer = navigator.userAgent.indexOf( 'MSIE' ) > -1,
+		    is_firefox = navigator.userAgent.indexOf( 'Firefox' ) > -1,
+		    is_safari = navigator.userAgent.indexOf( 'Safari' ) > -1,
+		    is_opera = navigator.userAgent.indexOf( 'Presto' ) > -1,
+		    is_mac = (navigator.userAgent.indexOf( 'Mac OS' ) != -1);
+		    is_windows = !is_mac;
+
+	    if ( is_chrome && is_safari ) {
+			is_safari = false;
+	    }
+
+	    if ( is_safari || is_windows ) {
+			$body.classList.add( 'safari-font-fix' );
+	    }
+	}
+
+
+
+	// Hero Sizing
+	// to prevent size jumping on iOS devices when toolbars scroll away
+	setHeroHeight( 'hero-size' );
+
+	function setHeroHeight( className ) {
+		var elements = document.getElementsByClassName( className );
+
+		if ( isMobile ) {
+			for ( var i = 0; i < elements.length; i++ ) {
+				var thisItem = elements.item(i),
+					heroHeight = $( thisItem ).outerHeight( false );
+
+				$( thisItem ).css( 'height', heroHeight + 'px' );
+			}
+		}
+	}
+
+
+
+	// Map
+	mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZWNvbnJhZCIsImEiOiJjajI4MWdhc2swMGw5MzJtbWp4ZmV2aWppIn0.wy3_dCqTbd2w33Kw9me8tw';
+	var map = new mapboxgl.Map({
+	    container: 'map',
+	    style: 'mapbox://styles/kyleconrad/cj281oep9000i2sn00o4hhibj?optimize=true',
+	    interactive: false,
+	    center: [-83.247,34.998],
+	    zoom: 13
+	});
+});
