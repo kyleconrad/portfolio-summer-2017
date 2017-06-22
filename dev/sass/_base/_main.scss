@@ -58,3 +58,12 @@ div {
 	display: block;
 	position: relative;
 }
+
+
+
+main {
+	@include css4 {
+		padding-left: calc( var(--space) * 2 + 1px );
+		padding-right: calc( var(--space) * 2 + 1px );
+	}
+}

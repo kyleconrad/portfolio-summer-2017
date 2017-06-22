@@ -1,8 +1,8 @@
 /* TEXT */
 
-
 $font-primary: "onramp", sans-serif;
 $font-secondary: "kings-caslon-display", serif;
+
 
 
 * {
@@ -18,8 +18,8 @@ $font-secondary: "kings-caslon-display", serif;
 }
 
 
-h1,
-h2 {
+
+h1 {
 	display: block;
 	color: $gray;
 }
@@ -39,10 +39,16 @@ h1 {
 	}
 }
 
-h2 {
+
+
+// Nav Menu
+.nav__menu-links__single,
+.nav__menu-links:before {
 	font-family: $font-secondary;
 
 	@include fontmath(1em, 24, 24, 0);
 
-	// @include transform(translateY(155%));
+	color: $gray;
+
+	text-decoration: none;
 }

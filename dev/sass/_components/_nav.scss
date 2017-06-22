@@ -17,12 +17,17 @@ nav {
 	pointer-events: none;
 }
 
+
 .nav__menu {
 	@include display(flex);
 	@include flex-direction(row);
 	@include flex-wrap(nowrap);
 	@include justify-content(space-between);
 	@include align-items(stretch);
+
+	@include css4 {
+		height: calc( var(--space) * 2 );
+	}
 }
 
 .nav__menu-logo {
@@ -36,12 +41,15 @@ nav {
 	background: $gray;
 }
 
+
 .nav__menu-right {
 	@include display(flex);
 	@include flex-direction(row);
 	@include flex-wrap(nowrap);
 	@include justify-content(center);
 	@include align-items(stretch);
+
+	height: 100%;
 
 	&:before {
 		display: block;
@@ -55,6 +63,8 @@ nav {
 
 		background: $gray;
 
+		@include transform(translateX(2em));
+
 		content: '';
 	}
 }
@@ -66,5 +76,61 @@ nav {
 	@include justify-content(center);
 	@include align-items(center);
 
+	height: 100%;
+
 	overflow: hidden;
+}
+
+.nav__menu-links {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(center);
+
+	height: 100%;
+
+	pointer-events: auto;
+
+	li {
+		height: 100%;
+
+		@include transform(translateY(100%));
+
+
+		&:first-child {
+			margin-right: 1em;
+		}
+	}
+
+
+	&:before {
+		@include display(flex);
+		@include flex-direction(row);
+		@include flex-wrap(nowrap);
+		@include justify-content(center);
+		@include align-items(center);
+
+		position: absolute;
+		top: 0;
+		right: 0;
+
+		height: 100%;
+
+		border-bottom: 1px solid $gray;
+
+		content: attr(data-title);
+	}
+}
+
+.nav__menu-links__single {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(center);
+
+	height: 100%;
+
+	border-bottom: 1px solid $gray;
 }
