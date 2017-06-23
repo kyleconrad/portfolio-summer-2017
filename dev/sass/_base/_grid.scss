@@ -42,9 +42,12 @@
 }
 
 
+.grid--100,
+.grid--75,
 .grid--66,
 .grid--50,
-.grid--33 {
+.grid--33,
+.grid--25 {
 	@include css4 {
 		padding: var(--padding);
 	}

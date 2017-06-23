@@ -107,6 +107,10 @@ article:nth-child(even) {
 	}
 }
 
+.work__content {
+	margin-bottom: 2em;
+}
+
 .work__detail {
 	@include display(flex);
 	@include flex-direction(column);

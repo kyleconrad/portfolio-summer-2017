@@ -1,9 +1,11 @@
 $(document).ready(function() {
-	var windowWidth = $(window).width(),
-		windowHeight = $(window).height();
+	var windowWidth = $( window ).width(),
+		windowHeight = $( window ).height();
 	var $body = document.getElementsByTagName( 'body' )[0];
-	var isMobile = navigator.userAgent.match(/mobile/i),
+	var isMobile = navigator.userAgent.match( /mobile/i ),
 		isDesktop;
+
+
 
 
 
@@ -14,6 +16,8 @@ $(document).ready(function() {
 	else if ( !isMobile ) {
 		$body.classList.add( 'desktop' );
 	}
+
+
 
 
 
@@ -41,6 +45,8 @@ $(document).ready(function() {
 
 
 
+
+
 	// Hero Sizing
 	// to prevent size jumping on iOS devices when toolbars scroll away
 	setHeroHeight( 'hero-size' );
@@ -57,6 +63,8 @@ $(document).ready(function() {
 			}
 		}
 	}
+
+
 
 
 
@@ -80,6 +88,8 @@ $(document).ready(function() {
 
 
 
+
+
 	// Nav Scrolling
 	var scrollTop = $( '.hero' ).outerHeight( true ),
 		navActive = false;
@@ -97,5 +107,27 @@ $(document).ready(function() {
 
 			navActive = false;
 		}
+	}
+
+
+
+
+
+	// Lazy Loading
+	lazyLoading();
+
+	function lazyLoading() {
+		window.lazySizesConfig = window.lazySizesConfig || {};
+		window.lazySizesConfig.srcAttr = 'data-original';
+		window.lazySizesConfig.loadMode = 2;
+		window.lazySizesConfig.expand = windowHeight * 3.5;
+		window.lazySizesConfig.expFactor = 3;
+
+		$( '.video-load' ).lazyload({
+			threshold: windowHeight * 2.25,
+			load: function(element){
+				$( '.grid--100, .grid--50' ).fitVids();
+			}
+		});
 	}
 });
