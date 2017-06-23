@@ -127,7 +127,7 @@ article:nth-child(even) {
 			top: var(--padding);
 		}
 
-		width: 50vw;
+		width: 100vw;
 		height: 1px;
 
 		background: $gray;
@@ -154,11 +154,48 @@ article:nth-child(even) {
 		position: absolute;
 		bottom: 0;
 
-		width: 75vw;
+		width: 100vw;
 		height: 1px;
 
 		background: $gray;
 
 		content: '';
+	}
+}
+
+
+
+.caption {
+	display: block;
+
+	position: relative;
+
+	@include css4 {
+		padding-top: calc( var(--padding) / 2 );
+	}
+
+
+	&:before {
+		display: block;
+
+		position: absolute;
+		top: 0;
+
+		width: 100vw;
+		height: 1px;
+
+		background: $gray;
+
+		content: '';
+	}
+}
+.caption--left {
+	&:before {
+		right: 0;
+	}
+}
+.caption--right {
+	&:before {
+		left: 0;
 	}
 }

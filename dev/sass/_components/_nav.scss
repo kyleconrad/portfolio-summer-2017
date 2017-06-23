@@ -78,7 +78,7 @@ nav {
 		background: $gray;
 
 		@include transform(translateX(2em));
-		transition: transform 0.5s;
+		transition: transform 0.25s;
 
 		content: '';
 	}

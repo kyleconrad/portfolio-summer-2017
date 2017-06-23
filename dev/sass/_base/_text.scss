@@ -22,7 +22,8 @@ $font-secondary: "kings-caslon-display", serif;
 h1,
 h2,
 h3,
-h4 {
+h4,
+.caption {
 	display: block;
 
 	font-family: $font-primary;
@@ -83,6 +84,13 @@ p {
 	em {
 		font-style: italic;
 	}
+}
+
+
+
+// Captions
+.caption {
+	@include fontmath(1em, 18, 18, 1);
 }
 
 

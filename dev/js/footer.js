@@ -117,12 +117,6 @@ $(document).ready(function() {
 	lazyLoading();
 
 	function lazyLoading() {
-		window.lazySizesConfig = window.lazySizesConfig || {};
-		window.lazySizesConfig.srcAttr = 'data-original';
-		window.lazySizesConfig.loadMode = 2;
-		window.lazySizesConfig.expand = windowHeight * 3.5;
-		window.lazySizesConfig.expFactor = 3;
-
 		$( '.video-load' ).lazyload({
 			threshold: windowHeight * 2.25,
 			load: function(element){
@@ -130,4 +124,26 @@ $(document).ready(function() {
 			}
 		});
 	}
+
+
+
+
+
+	// Widow Control
+	widowControl();
+
+	function widowControl() {
+		var windowWidth = $( window ).width(),
+			widowElements = $( 'p, .caption' );
+
+		widowElements.each( function() {
+			$( this ).html( $( this ).html().replace( /&nbsp;/g, ' ' ) );
+		});
+
+		if ( windowWidth > 700 ) {
+			widowElements.each( function() {
+			    $( this ).html( $( this ).html().replace( /\s((?=(([^\s<>]|<[^>]*>)+))\2)\s*$/, '&nbsp;$1' ) );
+			});
+		}
+	};
 });
