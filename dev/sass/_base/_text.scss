@@ -158,3 +158,25 @@ p {
 		}
 	}
 }
+
+
+
+// Button
+.button {
+	font-family: $font-secondary;
+
+	@include fontmath(1em, 24, 24, 0);
+
+	color: $gray;
+
+	text-decoration: none;
+
+
+	&:hover,
+	&:active,
+	&:focus {
+		font-style: italic;
+
+		color: $pink;
+	}
+}

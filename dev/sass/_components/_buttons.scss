@@ -1,2 +1,27 @@
 /* BUTTONS */
 
+.button {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(center);
+	@include align-items(center);
+
+	width: 75%;
+	height: 2.25em;
+
+	margin: 0.75em 0;
+
+	text-align: center;
+
+	background: rgba( $pink, 0.35 );
+
+	border: 1px solid $gray;
+
+
+	&:hover,
+	&:active,
+	&:focus {
+		background: $gray;
+	}
+}
