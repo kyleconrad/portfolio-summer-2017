@@ -98,3 +98,12 @@ p {
 
 	text-decoration: none;
 }
+.nav__menu-links__single {
+	&:hover,
+	&:active,
+	&:focus {
+		padding-right: 0.4em;
+
+		font-style: italic;
+	}
+}
