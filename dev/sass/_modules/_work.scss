@@ -8,7 +8,6 @@ article {
 
 article:nth-child(odd) {
 	.work__title {
-		@include justify-content(flex-end);
 		@include align-items(flex-end);
 
 		@include order(1);
@@ -33,9 +32,8 @@ article:nth-child(odd) {
 	}
 
 	.work__detail {
-		@include justify-content(flex-start);
 		@include align-items(flex-end);
-
+		@include order(1);
 
 		h3 {
 			margin-right: -0.5em;
@@ -48,6 +46,10 @@ article:nth-child(odd) {
 		}
 	}
 
+	.work__description {
+		@include order(2);
+	}
+
 	.work__footer {
 		&:after {
 			left: 0;
@@ -57,10 +59,50 @@ article:nth-child(odd) {
 
 article:nth-child(even) {
 	.work__title {
+		@include align-items(flex-end);
 
+		@include order(2);
+
+
+		h2 {
+			transform-origin: left top;
+
+			@include transform(translate(-0.125em, 110%) rotate(-90deg));
+		}
 	}
-	.work__hero {
 
+	.work__hero {
+		@include order(1);
+
+		@include css4 {
+			margin-left: calc( ( var(--space) * -2 ) - 1px - var(--padding) );
+		}
+
+		&:after {
+			left: 0;
+		}
+	}
+
+	.work__detail {
+		@include align-items(flex-start);
+		@include order(2);
+
+
+		&:before {
+			@include css4 {
+				left: var(--padding);
+			}
+		}
+	}
+
+	.work__description {
+		@include order(1);
+	}
+
+	.work__footer {
+		&:after {
+			right: 0;
+		}
 	}
 }
 
@@ -73,6 +115,7 @@ article:nth-child(even) {
 	@include display(flex);
 	@include flex-direction(column);
 	@include flex-wrap(nowrap);
+	@include justify-content(flex-end);
 }
 
 .work__hero {
@@ -115,6 +158,7 @@ article:nth-child(even) {
 	@include display(flex);
 	@include flex-direction(column);
 	@include flex-wrap(nowrap);
+	@include justify-content(flex-start);
 
 	padding-top: 1.5em;
 

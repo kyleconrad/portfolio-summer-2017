@@ -84,6 +84,41 @@ p {
 	em {
 		font-style: italic;
 	}
+
+
+	a {
+		display: inline-block;
+		position: relative;
+
+		color: $gray;
+
+		text-decoration: none;
+
+
+		&:after {
+			display: block;
+
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			right: 0;
+
+			border-bottom: 1px dotted $gray;
+
+			content: '';
+		}
+
+
+		&:hover,
+		&:active,
+		&:focus {
+			color: black;
+
+			&:after {
+				border-bottom: 1px solid black;
+			}
+		}
+	}
 }
 
 
@@ -113,5 +148,13 @@ p {
 		padding-right: 0.4em;
 
 		font-style: italic;
+	}
+
+	li:first-child & {
+		&:hover,
+		&:active,
+		&:focus {
+			padding-right: 0.425em;
+		}
 	}
 }
