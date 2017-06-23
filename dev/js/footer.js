@@ -77,4 +77,25 @@ $(document).ready(function() {
 			clearInterval( mapLoaded );
 		}
 	}, 10);
+
+
+
+	// Nav Scrolling
+	var scrollTop = $( '.hero' ).outerHeight( true ),
+		navActive = false;
+
+	window.addEventListener( 'scroll', navSwitch, false );
+
+	function navSwitch() {
+		if ( window.pageYOffset > scrollTop && !navActive ) {
+			document.getElementsByClassName( 'nav__menu-right' )[0].classList.add( 'nav__menu--active' );
+
+			navActive = true;
+		}
+		else if ( window.pageYOffset <= scrollTop && navActive ) {
+			document.getElementsByClassName( 'nav__menu-right' )[0].classList.remove( 'nav__menu--active' );
+
+			navActive = false;
+		}
+	}
 });
