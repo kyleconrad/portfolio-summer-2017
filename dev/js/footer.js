@@ -134,7 +134,7 @@ $(document).ready(function() {
 
 	function widowControl() {
 		var windowWidth = $( window ).width(),
-			widowElements = $( 'p, .caption' );
+			widowElements = $( 'h4, p, .caption' );
 
 		widowElements.each( function() {
 			$( this ).html( $( this ).html().replace( /&nbsp;/g, ' ' ) );

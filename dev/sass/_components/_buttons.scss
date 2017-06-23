@@ -7,6 +7,8 @@
 	@include justify-content(center);
 	@include align-items(center);
 
+	position: relative;
+
 	width: 75%;
 	height: 2.25em;
 
