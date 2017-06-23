@@ -16,7 +16,7 @@ article:nth-child(odd) {
 		h2 {
 			transform-origin: left bottom;
 
-			@include transform(translate(100%, 0.05em) rotate(-90deg));
+			@include transform(translate(100%, 8%) rotate(-90deg));
 		}
 	}
 
@@ -59,7 +59,7 @@ article:nth-child(odd) {
 
 article:nth-child(even) {
 	.work__title {
-		@include align-items(flex-end);
+		@include align-items(flex-start);
 
 		@include order(2);
 
@@ -67,7 +67,7 @@ article:nth-child(even) {
 		h2 {
 			transform-origin: left top;
 
-			@include transform(translate(-0.125em, 110%) rotate(-90deg));
+			@include transform(translate(-1.75%,110%) rotate(-90deg));
 		}
 	}
 
