@@ -67,3 +67,11 @@ main {
 		padding-right: calc( ( var(--space) * 2 + 1px ) - var(--padding) );
 	}
 }
+
+
+
+nav,
+header,
+main {
+	font-size: 1rem;
+}
