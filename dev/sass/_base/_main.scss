@@ -63,7 +63,7 @@ div {
 
 main {
 	@include css4 {
-		padding-left: calc( var(--space) * 2 + 1px );
-		padding-right: calc( var(--space) * 2 + 1px );
+		padding-left: calc( ( var(--space) * 2 + 1px ) - var(--padding) );
+		padding-right: calc( ( var(--space) * 2 + 1px ) - var(--padding) );
 	}
 }

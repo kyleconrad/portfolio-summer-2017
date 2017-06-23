@@ -1,0 +1,160 @@
+/* WORK ARTICLES */
+
+article {
+	margin-top: 10em;
+	margin-bottom: 10em;
+}
+
+
+article:nth-child(odd) {
+	.work__title {
+		@include justify-content(flex-end);
+		@include align-items(flex-end);
+
+		@include order(1);
+
+
+		h2 {
+			transform-origin: left bottom;
+
+			@include transform(translate(100%, 0.05em) rotate(-90deg));
+		}
+	}
+
+	.work__hero {
+		@include order(2);
+
+
+		&:after {
+			@include css4 {
+				right: calc( var(--padding) + 1px + ( var(--space) * -2 ) )
+			}
+		}
+	}
+
+	.work__detail {
+		@include justify-content(flex-start);
+		@include align-items(flex-end);
+
+
+		h3 {
+			margin-right: -0.5em;
+		}
+
+		&:before {
+			@include css4 {
+				right: var(--padding);
+			}
+		}
+	}
+
+	.work__footer {
+		&:after {
+			left: 0;
+		}
+	}
+}
+
+article:nth-child(even) {
+	.work__title {
+
+	}
+	.work__hero {
+
+	}
+}
+
+
+.work__header {
+	margin-bottom: 5em;
+}
+
+.work__title {
+	@include display(flex);
+	@include flex-direction(column);
+	@include flex-wrap(nowrap);
+}
+
+.work__hero {
+	img {
+		@include css4 {
+			width: calc( 100% + var(--padding) + 1px + ( var(--space) * 2 ) );
+		}
+
+		opacity: 0.5;
+
+		mix-blend-mode: multiply;
+	}
+
+
+	&:after {
+		display: block;
+
+		position: absolute;
+		top: 70%;
+
+		width: 75%;
+		height: 40%;
+
+		background: url('/images/patterns/pattern_wave.png');
+		background-size: 20px auto;
+
+		mix-blend-mode: multiply;
+
+		opacity: 0.35;
+
+		content: '';
+	}
+}
+
+.work__detail {
+	@include display(flex);
+	@include flex-direction(column);
+	@include flex-wrap(nowrap);
+
+	padding-top: 1.5em;
+
+
+	&:before {
+		display: block;
+
+		position: absolute;
+		@include css4 {
+			top: var(--padding);
+		}
+
+		width: 50vw;
+		height: 1px;
+
+		background: $gray;
+
+		content: '';
+	}
+}
+
+.work__description {
+	p {
+		margin-top: -0.4em;
+		margin-bottom: 1.75em;
+	}
+}
+
+.work__footer {
+	@include css4 {
+		padding-bottom: var(--padding);
+	}
+
+	&:after {
+		display: block;
+
+		position: absolute;
+		bottom: 0;
+
+		width: 75vw;
+		height: 1px;
+
+		background: $gray;
+
+		content: '';
+	}
+}

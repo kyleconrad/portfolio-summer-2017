@@ -1,32 +1,51 @@
 /* GRID */
 
-.grid-100 {
+.grid__row {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(nowrap);
+	@include justify-content(space-between);
+	@include align-items(stretch);
+}
+
+.grid__block {
+	@include display(flex);
+	@include flex-direction(row);
+	@include flex-wrap(wrap);
+	@include justify-content(space-between);
+	@include align-items(stretch);
+}
+
+
+.grid--100 {
 	width: 100%;
 }
 
-.grid-75 {
+.grid--75 {
 	width: 75%;
 }
 
-.grid-66 {
+.grid--66 {
 	width: calc( ( 100% / 3 ) * 2 );
 }
 
-.grid-50 {
+.grid--50 {
 	width: 50%;
 }
 
-.grid-33 {
+.grid--33 {
 	width: calc( 100% / 3 );
 }
 
-.grid-25 {
+.grid--25 {
 	width: 25%;
 }
 
 
-.grid-66,
-.grid-50,
-.grid-33 {
-	padding: 10px;
+.grid--66,
+.grid--50,
+.grid--33 {
+	@include css4 {
+		padding: var(--padding);
+	}
 }

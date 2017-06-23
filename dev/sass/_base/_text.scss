@@ -19,23 +19,69 @@ $font-secondary: "kings-caslon-display", serif;
 
 
 
-h1 {
+h1,
+h2,
+h3,
+h4 {
 	display: block;
+
+	font-family: $font-primary;
+
+	text-transform: uppercase;
+
 	color: $gray;
 }
 
 h1 {
-	font-family: $font-primary;
-
 	@include fontmath(1em, 40, 40, 20);
 
 	text-indent: 0.5em;
-	text-transform: uppercase;
 	text-align: center;
 
 
 	&:first-child {
 		margin-top: -0.125em;
+	}
+}
+
+h2 {
+	@include fontmath(1em, 60, 32, 16);
+}
+
+h3 {
+	@include fontmath(1em, 20, 26, 10);
+}
+
+h4 {
+	@include fontmath(1em, 16, 16, 4);
+
+
+	a {
+		color: $gray;
+
+		text-decoration: none;
+
+		opacity: 0.75;
+
+		&:hover,
+		&:active,
+		&:focus {
+			opacity: 1;
+		}
+	}
+}
+
+
+p {
+	display: block;
+
+	font-family: $font-secondary;
+
+	@include fontmath(1em, 24, 38, 0);
+
+
+	em {
+		font-style: italic;
 	}
 }
 
