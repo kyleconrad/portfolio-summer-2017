@@ -123,7 +123,7 @@ p {
 
 		font-weight: bold;
 
-		color: black;
+		color: $gray;
 
 		text-decoration: none;
 
@@ -132,11 +132,13 @@ p {
 			display: block;
 
 			position: absolute;
-			bottom: 0;
+			bottom: 0.15em;
 			left: 0;
 			right: 0;
 
-			border-bottom: 1px dotted black;
+			border-bottom: 1px dotted $gray;
+
+			opacity: 0.75;
 
 			content: '';
 		}
@@ -145,10 +147,10 @@ p {
 		&:hover,
 		&:active,
 		&:focus {
-			color: black;
-
 			&:after {
-				border-bottom: 1px solid black;
+				border-bottom: 1px solid $gray;
+
+				opacity: 1;
 			}
 		}
 	}
