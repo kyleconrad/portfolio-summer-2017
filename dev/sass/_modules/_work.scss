@@ -14,9 +14,16 @@ article:nth-child(odd) {
 
 
 		h2 {
+			position: absolute;
+
+			left: 100%;
+			@include css4 {
+				bottom: var(--padding);
+			}
+
 			transform-origin: left bottom;
 
-			@include transform(translate(100%, 8%) rotate(-90deg));
+			@include transform(rotate(-90deg));
 		}
 	}
 
@@ -65,9 +72,16 @@ article:nth-child(even) {
 
 
 		h2 {
+			position: absolute;
+
+			left: 0;
+			top: calc( 100% - var(--padding) );
+
+			padding-top: 0.075em;
+
 			transform-origin: left top;
 
-			@include transform(translate(-1.75%,110%) rotate(-90deg));
+			@include transform(rotate(-90deg));
 		}
 	}
 
