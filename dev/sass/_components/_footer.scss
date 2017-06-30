@@ -1,1 +1,17 @@
 /* FOOTER */
+
+.footer {
+	@extend .hero;
+
+	&:before {
+		left: auto;
+		top: auto;
+
+		right: 0;
+		bottom: 0;
+	}
+}
+
+.footer__title {
+	@extend .hero__title;
+}

@@ -49,7 +49,7 @@ $(document).ready(function() {
 
 	// Hero Sizing
 	// to prevent size jumping on iOS devices when toolbars scroll away
-	setHeroHeight( 'hero-size' );
+	setHeroHeight( 'block-size' );
 
 	function setHeroHeight( className ) {
 		var elements = document.getElementsByClassName( className );
@@ -92,17 +92,26 @@ $(document).ready(function() {
 
 	// Nav Scrolling
 	var scrollTop = $( '.hero' ).outerHeight( true ),
+		footerTop = $( '.footer' ).offset().top - 150,
 		navActive = false;
 
 	window.addEventListener( 'scroll', navSwitch, false );
 
 	function navSwitch() {
+		footerTop = $( '.footer' ).offset().top - 150;
+		
 		if ( window.pageYOffset > scrollTop && !navActive ) {
 			document.getElementsByClassName( 'nav__menu-right' )[0].classList.add( 'nav__menu--active' );
 
 			navActive = true;
 		}
 		else if ( window.pageYOffset <= scrollTop && navActive ) {
+			document.getElementsByClassName( 'nav__menu-right' )[0].classList.remove( 'nav__menu--active' );
+
+			navActive = false;
+		}
+
+		if ( window.pageYOffset >= footerTop && navActive ) {
 			document.getElementsByClassName( 'nav__menu-right' )[0].classList.remove( 'nav__menu--active' );
 
 			navActive = false;
