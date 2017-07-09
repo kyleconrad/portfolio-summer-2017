@@ -114,6 +114,15 @@ p {
 
 	@include fontmath(1em, 24, 38, 0);
 
+	text-indent: 1.75em;
+
+	margin-bottom: 0.5em;
+
+
+	&:first-child {
+		text-indent: 0;
+	}
+
 
 	em {
 		font-style: italic;
@@ -124,7 +133,6 @@ p {
 
 
 	a {
-		display: inline-block;
 		position: relative;
 
 		font-weight: bold;
@@ -138,7 +146,7 @@ p {
 			display: block;
 
 			position: absolute;
-			bottom: 0.15em;
+			bottom: -0.15em;
 			left: 0;
 			right: 0;
 
