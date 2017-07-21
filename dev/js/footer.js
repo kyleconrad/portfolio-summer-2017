@@ -208,32 +208,41 @@ $(document).ready(function() {
 
 
 	// Map Motion - Scroll Panning
+	// var hover = false,
+	// 	scroll = false;
 	var bodyHeight = $body.clientHeight,
 		panDistance = 1000,
-		currentPanDistance = panDistance / 100;
+		currentPanY = panDistance / 100;
 	var currentPos = window.pageYOffset,
-		scrollPos = currentPos;
+		scrollPos = currentPos,
+		scrollDuration;
 
 	window.addEventListener( 'scroll', mapScroll, false );
 
 	function mapScroll() {
 		currentPos = window.pageYOffset;
+		currentPanY = ( ( panDistance / 100 ) * ( currentPos - scrollPos ) ) / 5;
+		scrollDuration = Math.abs( ( currentPos - scrollPos ) * 75 );
 
-		if ( currentPos > scrollPos ) {
-			currentPanDistance = panDistance / 100;
-		}
-		else if ( currentPos < scrollPos ) {
-			currentPanDistance = ( panDistance / 100 ) * -1;
-		}
+		// currentPanY = ( panDistance / 100 ) * ( currentPos - scrollPos );
+
+		// if ( currentPos > scrollPos ) {
+		// 	// currentPanY = panDistance / 100;
+		// 	currentPanY = ( panDistance / 100 ) * ( currentPos - scrollPos ) / 10;
+		// }
+		// else if ( currentPos < scrollPos ) {
+		// 	currentPanY = ( panDistance / 100 ) * -1;
+		// }
+		// console.log( currentPanY, ( panDistance / 100 ) * ( currentPos - scrollPos ) / 10 );
 
 		if ( map.loaded() ) {
-			map.panBy( [ 0, currentPanDistance ], {
+			map.panBy( [ 0, currentPanY ], {
 				animate: true,
-				duration: 150,
-				// easing: easingInOut
-				easing: function (t) {
-		            return t;
-		        }
+				// duration: 200,
+				duration: scrollDuration,
+				// duration: ( panDistance / 2 ),
+				// duration: panDistance / 4,
+		  		easing: easingOut
 			})
 		}
 
@@ -248,9 +257,15 @@ $(document).ready(function() {
 	// 	return bodyHeight - windowHeight;
 	// }
 
-	// function easingInOut( t ) {
-	// 	return t < .5 ? 2 * t * t : -1 + ( 4 - 2 * t ) * t;
-	// }
+	function easingInOut( t ) {
+		return t < .5 ? 2 * t * t : -1 + ( 4 - 2 * t ) * t;
+	}
+	function easingOut( t ) {
+		return t * ( 2 - t );
+	}
+	function easingLinear( t ) {
+		return t;
+	}
 
 
 	// 	var scrollProgress = window.pageYOffset / bodyHeight,
