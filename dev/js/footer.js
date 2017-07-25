@@ -173,46 +173,12 @@ $(document).ready(function() {
 
 
 
-	// Map Motion - Mouse Hover (Pitch & Bearing)
-	// var bearing = 0,
-	// 	pitch = 0;
-
-	// window.onmousemove = mapMouseHover;
-
-	// function mapMouseHover( e ) {
-	// 	var x = e.clientX,
-	// 		y = e.clientY;
-
-	// 	var halfWidth = windowWidth / 2,
-	// 		halfHeight = windowHeight / 2;
-
-	// 	bearing = ( ( x - halfWidth ) * -1 ) / 50;
-	// 	pitch = ( ( y - windowHeight ) * -1 ) / 25;
-
-	// 	if ( map.loaded() ) {
-	// 		map.easeTo({
-	// 			pitch: pitch,
-	// 			// bearing: bearing,
-	// 			animate: true,
-	// 			easing: easing
-	// 		});
-	// 	}
-	// }
-
-	// function easing( t ) {
-	// 	return t * ( 1.75 - t );
-	// }
-
-
-
-
-
 	// Map Motion - Scroll Panning
-	// var hover = false,
-	// 	scroll = false;
-	var bodyHeight = $body.clientHeight,
-		panDistance = 1000,
-		currentPanY = panDistance / 100;
+	var scroll = false;
+	var bodyHeight = $body.clientHeight;
+	var	panDistance = 1000,
+		currentPanY = panDistance / 100,
+		currentPanX = 0;
 	var currentPos = window.pageYOffset,
 		scrollPos = currentPos,
 		scrollDuration;
@@ -220,6 +186,8 @@ $(document).ready(function() {
 	window.addEventListener( 'scroll', mapScroll, false );
 
 	function mapScroll() {
+		scroll = true;
+
 		currentPos = window.pageYOffset;
 		currentPanY = ( ( panDistance / 100 ) * ( currentPos - scrollPos ) ) / 5;
 		scrollDuration = Math.abs( ( currentPos - scrollPos ) * 75 );
@@ -235,15 +203,13 @@ $(document).ready(function() {
 		// }
 		// console.log( currentPanY, ( panDistance / 100 ) * ( currentPos - scrollPos ) / 10 );
 
-		if ( map.loaded() ) {
+		if ( map.loaded() && !map.isMoving() ) {
 			map.panBy( [ 0, currentPanY ], {
 				animate: true,
 				// duration: 200,
 				duration: scrollDuration,
-				// duration: ( panDistance / 2 ),
-				// duration: panDistance / 4,
 		  		easing: easingOut
-			})
+			});
 		}
 
 		scrollPos = currentPos;
@@ -257,6 +223,50 @@ $(document).ready(function() {
 	// 	return bodyHeight - windowHeight;
 	// }
 
+
+
+
+
+	// Map Motion - Mouse Hover
+	[ 'mousemove', 'mouseenter', 'mouseover', 'mouseleave' ].forEach( function( y ) {
+		window.addEventListener( y, mapHover, false );
+	});
+
+	function mapHover( e ) {
+		var halfWidth = windowWidth / 2,
+			halfHeight = windowHeight / 2;
+		var x = e.clientX,
+			y = e.clientY;
+		var duration;
+
+		var panX = Math.round( ( x - halfWidth ) / 10 ),
+			panY = Math.round( ( y - halfHeight ) / 5 );
+
+		if ( currentPos == scrollPos ) {
+			scroll = false;
+		}
+
+		if ( panX > panY ) {
+			duration = Math.abs( panX * 100 );
+		}
+		else {
+			duration = Math.abs( panY * 100 );
+		}
+
+		if ( map.loaded() && !scroll && !map.isMoving() ) {
+			map.panBy( [ panX, panY ], {
+				animate: true,
+				duration: duration,
+		  		easing: easingInOut
+			});
+		}
+	}
+
+
+
+
+
+	// Easing Functions
 	function easingInOut( t ) {
 		return t < .5 ? 2 * t * t : -1 + ( 4 - 2 * t ) * t;
 	}
@@ -266,6 +276,9 @@ $(document).ready(function() {
 	function easingLinear( t ) {
 		return t;
 	}
+
+
+
 
 
 	// 	var scrollProgress = window.pageYOffset / bodyHeight,

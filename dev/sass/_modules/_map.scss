@@ -11,8 +11,6 @@
 
 	pointer-events: none;
 
-	background: blue;
-
 	opacity: 0;
 
 	transition: 0.25s;
@@ -28,6 +26,6 @@
 		opacity: 0;
 	}
 	&.loaded {
-		opacity: 0.4;
+		opacity: 0.35;
 	}
 }

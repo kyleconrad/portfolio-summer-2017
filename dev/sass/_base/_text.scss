@@ -57,6 +57,11 @@ h2 {
 
 h3 {
 	@include fontmath(1em, 20, 26, 10);
+
+
+	article:nth-child(even) & {
+		margin-right: -0.5em;
+	}
 }
 
 h4 {
@@ -101,8 +106,15 @@ h4 {
 	}
 
 
-	article:nth-child(even) & {
+	article:nth-child(even) &:not(.no-spacing) {
 		margin-right: -0.25em;
+	}
+
+
+	&.no-spacing {
+		margin-top: 0.25em;
+
+		letter-spacing: 0;
 	}
 }
 
