@@ -109,12 +109,15 @@ h4 {
 	article:nth-child(even) &:not(.no-spacing) {
 		margin-right: -0.25em;
 	}
+	article:nth-child(even) &.no-spacing {
+		margin-right: -0.05em;
+	}
 
 
 	&.no-spacing {
 		margin-top: 0.25em;
 
-		letter-spacing: 0;
+		letter-spacing: 0.05em;
 	}
 }
 
