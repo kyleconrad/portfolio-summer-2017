@@ -180,33 +180,23 @@ $(document).ready(function() {
 		currentPanY = panDistance / 100,
 		currentPanX = 0;
 	var currentPos = window.pageYOffset,
-		scrollPos = currentPos,
-		scrollDuration;
+		scrollPos = currentPos;
 
 	window.addEventListener( 'scroll', mapScroll, false );
 
 	function mapScroll() {
+		var scrollDuration;
+
 		scroll = true;
 
 		currentPos = window.pageYOffset;
 		currentPanY = ( ( panDistance / 100 ) * ( currentPos - scrollPos ) ) / 5;
+
 		scrollDuration = Math.abs( ( currentPos - scrollPos ) * 75 );
-
-		// currentPanY = ( panDistance / 100 ) * ( currentPos - scrollPos );
-
-		// if ( currentPos > scrollPos ) {
-		// 	// currentPanY = panDistance / 100;
-		// 	currentPanY = ( panDistance / 100 ) * ( currentPos - scrollPos ) / 10;
-		// }
-		// else if ( currentPos < scrollPos ) {
-		// 	currentPanY = ( panDistance / 100 ) * -1;
-		// }
-		// console.log( currentPanY, ( panDistance / 100 ) * ( currentPos - scrollPos ) / 10 );
 
 		if ( map.loaded() && !map.isMoving() ) {
 			map.panBy( [ 0, currentPanY ], {
 				animate: true,
-				// duration: 200,
 				duration: scrollDuration,
 		  		easing: easingOut
 			});
@@ -237,7 +227,7 @@ $(document).ready(function() {
 			halfHeight = windowHeight / 2;
 		var x = e.clientX,
 			y = e.clientY;
-		var duration;
+		var panDuration;
 
 		var panX = Math.round( ( x - halfWidth ) / 10 ),
 			panY = Math.round( ( y - halfHeight ) / 5 );
@@ -247,16 +237,16 @@ $(document).ready(function() {
 		}
 
 		if ( panX > panY ) {
-			duration = Math.abs( panX * 100 );
+			panDuration = Math.abs( panX * 100 );
 		}
 		else {
-			duration = Math.abs( panY * 100 );
+			panDuration = Math.abs( panY * 100 );
 		}
 
 		if ( map.loaded() && !scroll && !map.isMoving() ) {
 			map.panBy( [ panX, panY ], {
 				animate: true,
-				duration: duration,
+				duration: panDuration,
 		  		easing: easingInOut
 			});
 		}
@@ -276,85 +266,6 @@ $(document).ready(function() {
 	function easingLinear( t ) {
 		return t;
 	}
-
-
-
-
-
-	// 	var scrollProgress = window.pageYOffset / bodyHeight,
-	// 		panDistance;
-
-	// 	currentPos = window.pageYOffset;
-
-	// 	// console.log( scrollDistance );
-
-	// 	if ( currentPos > scrollPos ) {
-	// 		// console.log( 'down', currentPos );
-	// 		panDistance = scrollProgress * 100;
-
-	// 		console.log( 'down', panDistance );
-	// 	}
-	// 	else {
-	// 		console.log( 'up', ( ( 1 - scrollProgress ) * 100 ) * -1 );
-	// 		// console.log( 'up', ( scrollDistance * -1 ) );
-	// 	}
-
-	// 	scrollPos = currentPos;
-	// }
-
-	// var scrollHeight = $body.clientHeight - ( windowHeight / 2 );
-
-	// 	scrollPos = window.pageYOffset,
-	// 	currentPos,
-	// 	sectionNum = 0,
-		// sections = [],
-		// sectionArray = [],
-		// sectionCount = 14,
-		// sectionHeight = scrollHeight / sectionCount;
-
-	// for ( var i = 0; i <= sectionCount; i++ ) {
-	// 	sectionArray.push( i * sectionHeight );
-	// }
-	// var mapTimeline = new TimelineMax({
-	// 		paused: true,
-	// 		smoothChildTiming: true,
-	// 		useFrames: true,
-	// 		ease: Strong.easeOut,
-	// 		onUpdate: function() {
-	// 			console.log( this.progress(), currentLatLong.lat, currentLatLong.long );
-
-	// 			if ( map.loaded() ) {
-	// 				map.easeTo({
-	// 					speed: 0.2,
-	// 					center: [ currentLatLong.long, currentLatLong.lat ]
-	// 				});
-	// 			}
-	// 		}
-	// 	});
-
-	// mapTimeline.from( currentLatLong, 1, {
-	// 	lat: latLong[0].lat
-	// });
-	// mapTimeline.add( TweenMax.from( currentLatLong, 1, { lat: latLong[0].lat } ) );
-
-		// .to( currentLatLong, 1, { lat: 25 } )
-		// .to( currentLatLong, 1, { lat: 250 } )
-		// .to( currentLatLong, 1, { lat: 500 } );
-
-	// for ( var i = 0; i < latLong.length; i++ ) {
-	// 	mapTimeline.to( currentLatLong, 1, {
-	// 		lat: latLong[i].lat,
-	// 		long: latLong[i].lat
-	// 	});
-	// }
-
-	// window.addEventListener( 'scroll', mapScroll, false );
-
-	// function mapScroll() {
-	// 	var scrollProgress = window.pageYOffset / scrollHeight;
-
-	// 	mapTimeline.totalProgress( scrollProgress );
-	// }
 
 
 
