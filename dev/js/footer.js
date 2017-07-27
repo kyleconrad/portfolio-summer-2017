@@ -238,8 +238,7 @@ $(document).ready(function() {
 	var blocks = document.getElementsByTagName( 'article' ),
 		navActive = false;
 
-	activeNav( window.pageYOffset );
-	activeBlock( window.pageYOffset );
+	navScroll();
 
 	window.addEventListener( 'scroll', navScroll, false );
 
@@ -315,6 +314,61 @@ $(document).ready(function() {
 
 	// 	return bodyHeight - windowHeight;
 	// }
+
+
+
+
+
+	// Nav Interaction
+	$( '.nav__menu-logo--link' ).on( 'click', function() {
+		window.scrollTo( 0, 0 );
+
+		return false;
+	});
+
+	$( '.nav__menu-links__single' ).on( 'click', function() {
+		var direction = $( this ).attr( 'data-direction' ),
+			target,
+			targetTop,
+			newTargetTop,
+			targetDuration;
+		var windowOffset = {
+			y: window.pageYOffset
+		};
+
+		if ( direction == 'next' ) {
+			target = $( 'article.active' ).next( 'article' );
+		}
+		else if ( direction == 'previous' ) {
+			target = $( 'article.active' ).prev( 'article' );
+		}
+
+		if ( !$( this ).hasClass( 'inactive' ) ) {
+			targetTop = target.offset().top + ( document.getElementsByClassName( 'nav__menu' )[0].clientHeight * 1.5 ),
+			targetDuration = Math.round( Math.abs( targetTop - window.pageYOffset ) / 4000 );
+
+			var scrollTween = TweenMax.to( windowOffset, targetDuration, {
+				y: targetTop,
+				ease: Power1.easeInOut,
+				onUpdate: function() {
+					window.scroll( 0, windowOffset.y )
+				}
+			});
+
+			$( window ).on( 'scroll', function() {
+				newTargetTop = target.offset().top + ( document.getElementsByClassName( 'nav__menu' )[0].clientHeight * 1.5 );
+
+				if ( targetTop != newTargetTop ) {
+					scrollTween.updateTo({
+						y: newTargetTop
+					}, false);
+				}
+			});
+		}
+
+		return false;
+	});
+
 
 
 

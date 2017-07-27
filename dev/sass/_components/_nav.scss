@@ -15,6 +15,7 @@ nav {
 	border: 1px solid $gray;
 
 	pointer-events: none;
+	outline: none;
 }
 
 
@@ -175,7 +176,7 @@ nav {
 
 
 	&.inactive {
-		cursor: none;
+		cursor: default;
 
 		opacity: 0.35;
 	}
