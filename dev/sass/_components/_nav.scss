@@ -170,4 +170,13 @@ nav {
 	height: 100%;
 
 	border-bottom: 1px solid $gray;
+
+	transition: opacity 0.25s;
+
+
+	&.inactive {
+		cursor: none;
+
+		opacity: 0.35;
+	}
 }

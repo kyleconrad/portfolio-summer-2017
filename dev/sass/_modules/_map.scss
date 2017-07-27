@@ -25,7 +25,8 @@
 
 		opacity: 0;
 	}
-	&.loaded {
+	
+	.loaded & {
 		opacity: 0.35;
 	}
 }

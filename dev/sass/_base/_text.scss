@@ -206,15 +206,15 @@ p {
 	text-decoration: none;
 }
 .nav__menu-links__single {
-	&:hover,
-	&:active,
-	&:focus {
+	&:not(.inactive):hover,
+	&:not(.inactive):active,
+	&:not(.inactive):focus {
 		padding-right: 0.4em;
 
 		font-style: italic;
 	}
 
-	li:first-child & {
+	li:first-child &:not(.inactive) {
 		&:hover,
 		&:active,
 		&:focus {
