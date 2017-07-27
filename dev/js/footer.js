@@ -301,20 +301,6 @@ $(document).ready(function() {
 		}
 	}
 
-	// function elementResize( element ) {
-		// new ResizeSensor( element, function() {
-
-		// });
-	// }
-
-	// function bodyResize() {
-	// 	new ResizeSensor( $body, function() {
-	// 		bodyHeight = $body.clientHeight;
-	// 	});
-
-	// 	return bodyHeight - windowHeight;
-	// }
-
 
 
 
