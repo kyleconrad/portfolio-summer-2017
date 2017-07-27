@@ -6,6 +6,25 @@
 		@each $variable, $value in $css-variables {
 			#{$variable}: $value;
 		}
+
+
+		@include breakpoint(xxlarge) {
+			--padding: 25px;
+		}
+		@include breakpoint(large) {
+			--padding: 20px;
+		}
+		@include breakpoint(landscape) {
+			--space: 1.25rem;
+		}
+		@include breakpoint(portrait) {
+			--space: 1rem;
+			--padding: 10px;
+		}
+		@include breakpoint(mobile) {
+			--space: 0.875rem;
+			--padding: 5px;
+		}
 	}
 }
 
@@ -40,12 +59,6 @@ body {
 	
 	position: relative;
 	overflow-x: hidden;
-
-	--screen-large: $largeSize;
-	--screen-landscape: $landscapeSize;
-	--screen-portrait: $portraitSize;
-	--screen-mobile: $mobileSize;
-	--screen-mobile-small: $mobileSmallSize;
 }
 
 
@@ -76,4 +89,21 @@ nav,
 header,
 main {
 	font-size: 1rem;
+
+
+	@include breakpoint(xxlarge) {
+		font-size: 1.25rem;
+	}
+	@include breakpoint(large) {
+		font-size: 1.15rem;
+	}
+	@include breakpoint(landscape) {
+		font-size: 0.9rem;
+	}
+	@include breakpoint(portrait) {
+		font-size: 0.85rem;
+	}
+	@include breakpoint(mobile) {
+		font-size: 0.9rem;
+	}
 }

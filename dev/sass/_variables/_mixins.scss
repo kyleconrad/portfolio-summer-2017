@@ -2,7 +2,10 @@
 
 // BREAKPOINTS
 @mixin breakpoint($point) {
-	@if $point == large {
+	@if $point == xxlarge {
+		@media only screen and (min-width : $xxLargeSize) { @content; }
+	}
+	@else if $point == large {
 		@media only screen and (min-width : $largeSize) { @content; }
 	}
 	@else if $point == landscape {

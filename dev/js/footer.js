@@ -72,6 +72,7 @@ $(document).ready(function() {
 
 
 	// Map Loading
+	// TO DO: ADD RANDOM LOCATION BKG STARTING
 	// var currentLatLong = {
 	// 	lat: 36.5604224,
 	// 	long: -87.4166623
@@ -219,6 +220,13 @@ $(document).ready(function() {
 
 
 
+	// Map Motion - Mobile Tilt
+	// TO DO: ADD DEVICE ORIENTATION PANNING
+
+
+
+
+	
 	// Easing Functions
 	function easingInOut( t ) {
 		return t < .5 ? 2 * t * t : -1 + ( 4 - 2 * t ) * t;

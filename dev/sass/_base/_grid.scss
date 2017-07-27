@@ -6,6 +6,11 @@
 	@include flex-wrap(nowrap);
 	@include justify-content(space-between);
 	@include align-items(stretch);
+
+
+	@include breakpoint(mobile) {
+		@include flex-direction(column);
+	}
 }
 
 .grid__block {
@@ -19,6 +24,11 @@
 
 .grid--half {
 	width: calc( 50% - 5px );
+
+
+	@include breakpoint(mobile) {
+		width: 100%;
+	}
 }
 
 
@@ -55,5 +65,10 @@
 .grid--25 {
 	@include css4 {
 		padding: var(--padding);
+	}
+
+
+	@include breakpoint(mobile) {
+		width: 100%;
 	}
 }

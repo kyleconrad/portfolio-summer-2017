@@ -44,12 +44,22 @@ article:nth-child(odd) {
 
 		h3 {
 			margin-right: -0.5em;
+
+
+			@include breakpoint(portrait) {
+				margin-right: -0.27778em;
+			}
 		}
 
 		&:before {
 			@include css4 {
 				right: var(--padding);
 			}
+		}
+
+
+		@include breakpoint(mobile) {
+			@include align-items(flex-start);
 		}
 	}
 
@@ -107,10 +117,20 @@ article:nth-child(even) {
 				left: var(--padding);
 			}
 		}
+
+
+		@include breakpoint(mobile) {
+			@include order(1);
+		}
 	}
 
 	.work__description {
 		@include order(1);
+
+
+		@include breakpoint(mobile) {
+			@include order(2);
+		}
 	}
 
 	.work__footer {
@@ -118,6 +138,11 @@ article:nth-child(even) {
 
 		&:after {
 			right: 0;
+		}
+
+
+		@include breakpoint(mobile) {
+			text-align: left;
 		}
 	}
 }
@@ -194,6 +219,11 @@ article:nth-child(even) {
 
 		content: '';
 	}
+
+
+	@include breakpoint(mobile) {
+		padding-bottom: 2em;
+	}
 }
 
 .work__description {
@@ -224,6 +254,11 @@ article:nth-child(even) {
 		background: $gray;
 
 		content: '';
+	}
+
+
+	@include breakpoint(mobile) {
+		padding-bottom: 1.5em;
 	}
 }
 

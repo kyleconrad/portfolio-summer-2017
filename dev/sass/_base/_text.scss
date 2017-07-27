@@ -65,8 +65,11 @@ h3 {
 	@include fontmath(1em, 20, 26, 10);
 
 
-	article:nth-child(even) & {
-		margin-right: -0.5em;
+	@include breakpoint(portrait) {
+		@include fontmath(1em, 18, 24, 5);
+	}
+	@include breakpoint(mobile) {
+		@include fontmath(1em, 20, 26, 10);
 	}
 }
 
@@ -153,40 +156,43 @@ p {
 	}
 
 
-	a {
-		position: relative;
+	@include breakpoint(landscape) {
+		text-indent: 1.5em;
+	}
+}
+p a {
+	position: relative;
 
-		font-weight: bold;
+	font-weight: bold;
 
-		color: $gray;
+	color: $gray;
 
-		text-decoration: none;
+	text-decoration: none;
 
 
+	&:after {
+		display: block;
+
+		position: absolute;
+		bottom: -0.15em;
+		left: 0;
+		right: 0;
+
+		border-bottom: 1px dotted $gray;
+
+		opacity: 0.75;
+
+		content: '';
+	}
+
+
+	&:hover,
+	&:active,
+	&:focus {
 		&:after {
-			display: block;
+			border-bottom: 1px solid $gray;
 
-			position: absolute;
-			bottom: -0.15em;
-			left: 0;
-			right: 0;
-
-			border-bottom: 1px dotted $gray;
-
-			opacity: 0.75;
-
-			content: '';
-		}
-
-
-		&:hover,
-		&:active,
-		&:focus {
-			&:after {
-				border-bottom: 1px solid $gray;
-
-				opacity: 1;
-			}
+			opacity: 1;
 		}
 	}
 }
