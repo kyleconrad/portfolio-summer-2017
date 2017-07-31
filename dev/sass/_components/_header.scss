@@ -40,7 +40,7 @@
 
 	height: 30%;
 
-	@include transform(rotate(-90deg));
+	@include transform(translateZ(0) rotate(-90deg));
 
 
 	&:before,
@@ -59,11 +59,16 @@
 		background: $gray;
 
 		content: '';
+
+
+		@include breakpoint(mobile) {
+			width: 20px;
+		}
 	}
 	&:before {
-		@include transform(translate(-50%,-50%) rotate(45deg));
+		@include transform(translate3d(-50%,-50%,0) rotate(45deg));
 	}
 	&:after {
-		@include transform(translate(-50%,-50%) rotate(-45deg));
+		@include transform(translate3d(-50%,-50%,0) rotate(-45deg));
 	}
 }

@@ -7,7 +7,7 @@
 	transition-delay: 0.5s;
 
 	.loading & {
-		@include transform(translateX(120%));
+		@include transform(translate3d(120%,0,0));
 	}
 }
 .nav__menu-right__container {
@@ -18,7 +18,7 @@
 	transition-delay: 0.75s;
 
 	.loading & {
-		@include transform(translateY(100%));
+		@include transform(translate3d(0,100%,0));
 	}
 }
 
@@ -29,7 +29,7 @@
 	transition-delay: 0.75s;
 
 	.loading & {
-		@include transform(translateX(-100%));
+		@include transform(translate3d(-100%,0,0));
 	}
 }
 
@@ -38,6 +38,8 @@
 .hero__title {
 	transition: 0.5s;
 	transition-delay: 0.75s;
+
+	@include perspective(1000);
 
 	.loading & {
 		@include transform(rotate(0));
@@ -51,6 +53,13 @@
 	}
 
 	transition: 0.25s;
+
+
+	@include breakpoint(mobile) {
+		width: 20px;
+		max-width: 20px;
+	}
+
 	
 	.loading & {
 		width: 0;
@@ -70,12 +79,12 @@
 }
 .hero__title h1:first-child {
 	.loading & {
-		@include transform(translateY(-100%));
+		@include transform(translate3d(0,-100%,0));
 	}
 }
 .hero__title h1:last-child {
 	.loading & {
-		@include transform(translateY(100%));
+		@include transform(translate3d(0,100%,0));
 	}
 }
 
@@ -85,6 +94,8 @@
 	opacity: 0.35;
 
 	transition: opacity 0.25s;
+
+	@include backface-visibility(hidden);
 
 
 	.loading &,

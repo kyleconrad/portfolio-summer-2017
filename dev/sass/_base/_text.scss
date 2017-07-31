@@ -59,6 +59,15 @@ h2 {
 	text-indent: -0.04em;
 
 	white-space: nowrap;
+
+
+	@include breakpoint(mobile) {
+		margin-top: 0.15em;
+
+		line-height: 0.75;
+
+		white-space: normal;
+	}
 }
 
 h3 {

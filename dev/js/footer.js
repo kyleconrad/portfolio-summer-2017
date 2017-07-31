@@ -348,6 +348,10 @@ $(document).ready(function() {
 			targetTop = target.offset().top + ( document.getElementsByClassName( 'nav__menu' )[0].clientHeight * 1.5 ),
 			targetDuration = Math.round( Math.abs( targetTop - window.pageYOffset ) / 4000 );
 
+			if ( targetDuration < 0.5 ) {
+				targetDuration = 0.5;
+			}
+
 			var scrollTween = TweenMax.to( windowOffset, targetDuration, {
 				y: targetTop,
 				ease: Power1.easeInOut,

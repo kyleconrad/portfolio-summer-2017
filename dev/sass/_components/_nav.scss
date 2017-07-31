@@ -29,8 +29,30 @@ nav {
 	@include css4 {
 		height: calc( var(--space) * 2 );
 	}
+
+
+	@include breakpoint(mobile) {
+		@include css4 {
+			height: calc( var(--space) * 3 );
+		}
+	}
 }
 
+.nav__menu-logo--link,
+.nav__menu-logo {
+	@include css4 {
+		height: calc( var(--space) * 2 );
+		width: calc( var(--space) * 2 );
+	}
+
+
+	@include breakpoint(mobile) {
+		@include css4 {
+			height: calc( var(--space) * 3 );
+			width: calc( var(--space) * 3 );
+		}
+	}
+}
 .nav__menu-logo--link {
 	display: block;
 
@@ -38,19 +60,9 @@ nav {
 	left: 0;
 	top: 0;
 
-	@include css4 {
-		height: calc( var(--space) * 2 );
-		width: calc( var(--space) * 2 );
-	}
-
 	pointer-events: auto;
 }
 .nav__menu-logo {
-	@include css4 {
-		height: calc( var(--space) * 2 );
-		width: calc( var(--space) * 2 );
-	}
-
 	padding: 0.25em;
 
 	background: $gray;

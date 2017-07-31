@@ -30,6 +30,11 @@
 
 		content: '';
 	}
+
+
+	@include breakpoint(mobile) {
+		height: 1.5em;
+	}
 }
 
 .video-load {

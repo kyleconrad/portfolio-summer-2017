@@ -6,8 +6,8 @@ article {
 
 
 	@include breakpoint(mobile) {
-		padding-top: 10em;
-		padding-bottom: 10em;
+		padding-top: 8em;
+		padding-bottom: 8em;
 	}
 }
 
@@ -30,6 +30,24 @@ article:nth-child(odd) {
 			transform-origin: left bottom;
 
 			@include transform(rotate(-90deg));
+
+
+			@include breakpoint(mobile) {
+				position: relative;
+
+				left: auto;
+				bottom: 0;
+
+				padding-top: 0;
+
+				@include transform(rotate(0));
+			}
+		}
+
+
+		@include breakpoint(mobile) {
+			@include align-items(flex-start);
+			@include order(2);
 		}
 	}
 
@@ -41,6 +59,11 @@ article:nth-child(odd) {
 			@include css4 {
 				right: calc( var(--padding) + 1px + ( var(--space) * -2 ) )
 			}
+		}
+
+
+		@include breakpoint(mobile) {
+			@include order(1);
 		}
 	}
 
@@ -98,6 +121,18 @@ article:nth-child(even) {
 			transform-origin: left top;
 
 			@include transform(rotate(-90deg));
+
+
+			@include breakpoint(mobile) {
+				position: relative;
+
+				left: auto;
+				top: auto;
+
+				padding-top: 0;
+
+				@include transform(rotate(0));
+			}
 		}
 	}
 
@@ -156,6 +191,11 @@ article:nth-child(even) {
 
 .work__header {
 	margin-bottom: 5em;
+
+
+	@include breakpoint(mobile) {
+		margin-bottom: 2em;
+	}
 }
 
 .work__title {
@@ -194,6 +234,12 @@ article:nth-child(even) {
 		opacity: 0.35;
 
 		content: '';
+
+
+		@include breakpoint(mobile) {
+			top: auto;
+			bottom: 70%;
+		}
 	}
 }
 
@@ -297,8 +343,17 @@ article:nth-child(even) {
 .caption--left {
 	text-align: right;
 
+	margin-right: -0.05556em;
+
 	&:before {
 		right: 0;
+	}
+
+
+	@include breakpoint(mobile) {
+		text-align: left;
+
+		margin-right: 0;
 	}
 }
 .caption--right {
