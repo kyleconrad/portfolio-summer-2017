@@ -82,43 +82,6 @@ $(document).ready(function() {
 		lat: 34.998,
 		long: -83.247
 	}
-	// var latLong = [
-	// 		{
-	// 			label: 'Brooklyn, NY',
-	// 			lat: 40.6453531,
-	// 			long: -74.0150373
-	// 		},
-	// 		{
-	// 			label: 'Hinesville, GA',
-	// 			lat: 31.8281477,
-	// 			long: -81.6588799
-	// 		},
-	// 		{
-	// 			label: 'Providence, RI',
-	// 			lat: 41.8170512,
-	// 			long: -71.4561874
-	// 		},
-	// 		{
-	// 			label: 'Fairfax, VA',
-	// 			lat: 38.8522765,
-	// 			long: -77.3193475
-	// 		},
-	// 		{
-	// 			label: 'Virginia Beach, VA',
-	// 			lat: 36.7676818,
-	// 			long: -76.1877483
-	// 		},
-	// 		{
-	// 			label: 'San Antonio, TX',
-	// 			lat: 29.4816561,
-	// 			long: -98.6544886
-	// 		},
-	// 		{
-	// 			label: 'Richmond, VA',
-	// 			lat: 37.5247764,
-	// 			long: -77.5633013
-	// 		}
-	// 	]
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZWNvbnJhZCIsImEiOiJjajI4MWdhc2swMGw5MzJtbWp4ZmV2aWppIn0.wy3_dCqTbd2w33Kw9me8tw';
 	var map = new mapboxgl.Map({
@@ -222,13 +185,43 @@ $(document).ready(function() {
 
 	// Map Motion - Mobile Tilt
 	// TO DO: ADD DEVICE ORIENTATION PANNING
-	[ 'deviceorientation', 'MozOrientation', 'orientationchange' ].forEach( function( z ) {
-		window.addEventListener( z, mapOrientation, false );
-	});
+	// [ 'deviceorientation', 'MozOrientation', 'orientationchange' ].forEach( function( z ) {
+	// 	window.addEventListener( z, mapOrientation, false );
+	// });
 
-	function mapOrientation( e ) {
+	// function mapOrientation( e ) {
+	// 	var orientX,
+	// 		orientY;
+	// 	var panDuration;
 
-	}
+	// 	if ( window.orientation == 0 ) {
+	// 		orientX = e.gamma;
+	// 		orientY = e.beta;
+	// 	}
+	// 	else if ( window.orientation == 90 ) {
+	// 		orientX = e.beta;
+	// 		orientY = e.gamma * -1;
+	// 	}
+	// 	else if ( window.orientation == -90 ) {
+	// 		orientX = e.beta * -1;
+	// 		orientY = e.gamma;
+	// 	}
+
+	// 	if ( orientX > orientY ) {
+	// 		panDuration = Math.abs( orientX * 100 );
+	// 	}
+	// 	else {
+	// 		panDuration = Math.abs( orientY * 100 );
+	// 	}
+
+	// 	if ( map.loaded() && !scroll && !map.isMoving() ) {
+	// 		map.panBy( [ orientX, orientY ], {
+	// 			animate: true,
+	// 			duration: panDuration,
+	// 	  		easing: easingInOut
+	// 		});
+	// 	}
+	// }
 
 
 
@@ -431,6 +424,11 @@ $(document).ready(function() {
 
 				windowWidth = $( window ).width();
 			}, 250);
+		}
+
+		if ( isMobile && map.loaded() ) {
+			// $( 'canvas.mapboxgl-canvas' ).css( 'width', $( window ).width() + 'px' ).css( 'height', $( window ).height() + 'px' );
+			map.resize();
 		}
 	});
 

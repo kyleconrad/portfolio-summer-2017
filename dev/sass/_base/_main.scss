@@ -102,10 +102,4 @@ main {
 	@include breakpoint(landscape) {
 		font-size: 0.9rem;
 	}
-	@include breakpoint(portrait) {
-		font-size: 0.85rem;
-	}
-	@include breakpoint(mobile) {
-		font-size: 0.9rem;
-	}
 }

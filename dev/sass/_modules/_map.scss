@@ -26,9 +26,19 @@
 		height: 100%;
 
 
-		@include breakpoint(mobile) {
+		.mobile & {
 			bottom: auto;
 
+			height: 120%;
+		}
+	}
+
+	.mapboxgl-canvas-container {
+		width: 100%;
+		height: 100%;
+
+
+		.mobile & {
 			height: 120%;
 		}
 	}
