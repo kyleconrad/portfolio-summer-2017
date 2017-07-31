@@ -3,7 +3,8 @@ $(document).ready(function() {
 	// Base Variables
 	var windowWidth = $( window ).width(),
 		windowHeight = $( window ).height();
-	var $body = document.getElementsByTagName( 'body' )[0],
+	var $html = document.getElementsByTagName( 'html' )[0],
+		$body = document.getElementsByTagName( 'body' )[0],
 		$main = document.getElementsByTagName( 'main' )[0];
 	var isMobile = navigator.userAgent.match( /mobile/i ),
 		isDesktop;
@@ -131,9 +132,8 @@ $(document).ready(function() {
 	});
 
 	var mapLoaded = setInterval( function() {
-		if ( map.loaded() ) {
+		if ( map.loaded() && $html.classList.contains( 'wf-active' ) ) {
 			$body.classList.remove( 'loading' );
-			$body.classList.add( 'loaded' );
 
 			map.resize();
 
@@ -222,6 +222,13 @@ $(document).ready(function() {
 
 	// Map Motion - Mobile Tilt
 	// TO DO: ADD DEVICE ORIENTATION PANNING
+	[ 'deviceorientation', 'MozOrientation', 'orientationchange' ].forEach( function( z ) {
+		window.addEventListener( z, mapOrientation, false );
+	});
+
+	function mapOrientation( e ) {
+
+	}
 
 
 

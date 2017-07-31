@@ -1,0 +1,94 @@
+/* LOADING */
+
+.nav__menu-right {
+	overflow: visible;
+
+	transition: 0.25s;
+	transition-delay: 0.5s;
+
+	.loading & {
+		@include transform(translateX(120%));
+	}
+}
+.nav__menu-right__container {
+	overflow-y: hidden;
+}
+.nav__menu-links {
+	transition: transform 0.25s;
+	transition-delay: 0.75s;
+
+	.loading & {
+		@include transform(translateY(100%));
+	}
+}
+
+
+
+.hero:before {
+	transition: 0.25s;
+	transition-delay: 0.75s;
+
+	.loading & {
+		@include transform(translateX(-100%));
+	}
+}
+
+
+
+.hero__title {
+	transition: 0.5s;
+	transition-delay: 0.75s;
+
+	.loading & {
+		@include transform(rotate(0));
+	}
+}
+.hero__title:before,
+.hero__title:after {
+	@include css4 {
+		width: calc( var(--space) * 1.5 );
+		max-width: calc( var(--space) * 1.5 );
+	}
+
+	transition: 0.25s;
+	
+	.loading & {
+		width: 0;
+		max-width: 0;
+	}
+}
+
+
+
+.hero__title h1 {
+	transition: 0.25s;
+	transition-delay: 0.5s;
+
+	.loading & {
+		opacity: 0;
+	}
+}
+.hero__title h1:first-child {
+	.loading & {
+		@include transform(translateY(-100%));
+	}
+}
+.hero__title h1:last-child {
+	.loading & {
+		@include transform(translateY(100%));
+	}
+}
+
+
+
+.map {
+	opacity: 0.35;
+
+	transition: opacity 0.25s;
+
+
+	.loading &,
+	.loading &.mapboxgl-map {
+		opacity: 0;
+	}
+}

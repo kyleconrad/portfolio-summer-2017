@@ -3,6 +3,12 @@
 article {
 	padding-top: 12em;
 	padding-bottom: 12em;
+
+
+	@include breakpoint(mobile) {
+		padding-top: 10em;
+		padding-bottom: 10em;
+	}
 }
 
 
