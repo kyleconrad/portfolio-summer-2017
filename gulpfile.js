@@ -26,7 +26,12 @@ var gulp = require('gulp'),
 	replace = require('gulp-replace'),
 	imagemin = require('gulp-imagemin'),
     pngquant = require('imagemin-pngquant'),
-    sitemap = require('gulp-sitemap');
+    sitemap = require('gulp-sitemap'),
+
+    // Required for deploy
+    gutil = require('gulp-util'),
+    rsync = require('rsyncwrapper'),
+    awspublish = require('gulp-awspublish');
 
 
 
@@ -71,8 +76,9 @@ gulp.task('html-build', function() {
 
 
 // Ensure HTML is compiled before reloading browsers
-gulp.task('html-watch', ['html-build'], function (done) {
+gulp.task('html-watch', ['html-build'], function(done) {
 	browserSync.reload();
+
 	done();
 });
 
@@ -116,7 +122,7 @@ gulp.task('minify', ['sass'], function() {
 
 
 // Concat and uglify JavaScript
-gulp.task('scripts', function(){
+gulp.task('scripts', function() {
 	gulp.src('./dev/js/*.js')
 		.pipe(uglify())
 		.pipe(gulp.dest('./build/js'))
@@ -174,7 +180,7 @@ gulp.task('html', ['merge'], function() {
 		}))
 		.pipe(replace('/css/', '//cdn.kyleconrad.com/css/'))
 		.pipe(replace('/js/', '//cdn.kyleconrad.com/js/'))
-		.pipe(replace('/img/', '//cdn.kyleconrad.com/img/'))
+		.pipe(replace('src="/images/', 'src="//cdn.kyleconrad.com/images/'))
 		.pipe(revReplace({
 			manifest: manifest
 		}))
@@ -196,7 +202,7 @@ gulp.task('sitemap', ['html'], function() {
         }))
         .pipe(gulp.dest('./build'));
 
-	del(['./build/rev-manifest.json']);
+	del(['./build/rev-manifest.json', './build/**/*.rev']);
 });
 
 
@@ -227,7 +233,7 @@ gulp.task('images', function() {
 
 
 // Main build function
-gulp.task('build', ['remove'], function(){
+gulp.task('build', ['remove'], function() {
 	return gulp.start(
 		'sitemap',
 		'images'
@@ -241,3 +247,84 @@ gulp.task('build', ['remove'], function(){
 // =================================================================================== //
 // Deployment
 // =================================================================================== //
+
+
+// Deployment to Digital Ocean
+gulp.task('deploy-do', function() {
+	rsync({
+		ssh: true,
+		src: 'build/',
+		dest: '162.243.216.48:/var/www/kyleconrad.com/public_html',
+		recursive: true,
+		syncDest: true,
+		args: ['--verbose --progress'],
+		exclude: ['.DS_Store']
+	}, function(error, stdout, stderr, cmd) {
+		if ( error ) {
+			throwError('deploy-do', gutil.colors.red(error.message));
+		}
+		else {
+			gutil.log(stdout);
+		}
+	});
+
+	rsync({
+		ssh: true,
+		src: './.htaccess',
+		dest: '162.243.216.48:/var/www/kyleconrad.com/.htaccess',
+		recursive: false,
+		syncDest: false,
+		args: ['--verbose --progress']
+	}, function(error, stdout, stderr, cmd) {
+		if ( error ) {
+			throwError('deploy-do', gutil.colors.red(error.message));
+		}
+		else {
+			gutil.log(stdout);
+		}
+	});
+});
+
+
+// Deployment to Amazon AWS/S3
+gulp.task('deploy-s3', function() {
+	var awsCreds = require('./aws.json');
+
+	var publisher = awspublish.create({
+		region: awsCreds.region,
+		params: {
+			Bucket: awsCreds.bucket
+		},
+		accessKeyId: awsCreds.key,
+		secretAccessKey: awsCreds.secret
+	});
+
+	var headers = {
+		'Cache-Control': 'max-age=315360000, no-transform, public',
+		'x-amz-acl': 'public-read'
+	};
+
+	gulp.src('./build/**')
+		.pipe(publisher.publish(headers))
+		.pipe(publisher.sync())
+		.pipe(publisher.cache())
+		.pipe(awspublish.reporter());
+});
+
+
+// Main deploy task
+gulp.task('deploy', function() {
+	return gulp.start(
+		'deploy-do',
+		'deploy-s3'
+	)
+});
+
+
+// Highlight error messages
+function throwError(taskName, msg) {
+	throw new gutil.PluginError({
+		plugin: taskName,
+		message: msg
+	});
+}
