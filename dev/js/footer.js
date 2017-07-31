@@ -423,7 +423,6 @@ $(document).ready(function() {
 
 		windowHeight = $( window ).height();
 
-		// only fire on horizontal, not vertical - prevents weird iOS jumping when toolbars scroll away
 		if ( windowWidth != newWindowWidth ) {
 			clearTimeout( window.resizedFinished );
 

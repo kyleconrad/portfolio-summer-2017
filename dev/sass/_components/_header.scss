@@ -9,6 +9,8 @@
 
 	height: 100vh;
 
+	overflow: visible;
+
 
 	&:before {
 		display: block;
@@ -28,6 +30,11 @@
 		opacity: 0.35;
 
 		content: '';
+
+
+		@include breakpoint(mobile) {
+			height: 100%;
+		}
 	}
 }
 

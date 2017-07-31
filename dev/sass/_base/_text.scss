@@ -81,6 +81,9 @@ h3 {
 		@include fontmath(1em, 20, 26, 10);
 	}
 }
+.safari-font-fix h3 {
+	-webkit-text-stroke: 0.05px;
+}
 
 h4 {
 	@include fontmath(1em, 16, 16, 4);
@@ -138,6 +141,9 @@ h4 {
 		letter-spacing: 0.05em;
 	}
 }
+.safari-font-fix h4 {
+	-webkit-text-stroke: 0.1px;
+}
 
 
 p {
@@ -168,6 +174,9 @@ p {
 	@include breakpoint(landscape) {
 		text-indent: 1.5em;
 	}
+}
+.safari-font-fix p {
+	-webkit-text-stroke: 0.1px;
 }
 p a {
 	position: relative;
@@ -212,6 +221,9 @@ p a {
 .caption {
 	@include fontmath(1em, 18, 18, 1);
 }
+.safari-font-fix .caption {
+	-webkit-text-stroke: 0.1px;
+}
 
 
 
@@ -225,6 +237,10 @@ p a {
 	color: $gray;
 
 	text-decoration: none;
+}
+.safari-font-fix .nav__menu-links__single,
+.safari-font-fix .nav__menu-links:before {
+	-webkit-text-stroke: 0.1px;
 }
 .nav__menu-links__single {
 	&:not(.inactive):hover,

@@ -90,6 +90,8 @@ header,
 main {
 	font-size: 1rem;
 
+	overflow-x: hidden;
+
 
 	@include breakpoint(xxlarge) {
 		font-size: 1.25rem;

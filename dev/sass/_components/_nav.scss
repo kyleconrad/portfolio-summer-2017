@@ -3,6 +3,8 @@
 nav {
 	position: fixed;
 
+	overflow: visible;
+
 	@include css4 {
 		top: var(--space);
 		right: var(--space);
