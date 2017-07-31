@@ -73,23 +73,49 @@ $(document).ready(function() {
 
 
 	// Map Loading
-	// TO DO: ADD RANDOM LOCATION BKG STARTING
-	// var currentLatLong = {
-	// 	lat: 36.5604224,
-	// 	long: -87.4166623
-	// }
-	var currentLatLong = {
-		lat: 34.998,
-		long: -83.247
-	}
+	var latLong = [
+		{
+			lat: 34.998,
+			long: -83.247
+		},
+		{
+			lat: 49.083055,
+			long: 7.715181
+		},
+		{
+			lat: 48.226632,
+			long: -114.485426
+		},
+		{
+			lat: 32.228782,
+			long: 78.441790
+		},
+		{
+			lat: -16.415126,
+			long: -66.553350
+		},
+		{
+			lat: 38.709337,
+			long: -119.796468
+		},
+		{
+			lat: 46.472400,
+			long: 12.091968
+		},
+		{
+			lat: 41.917287,
+			long: 73.5451355
+		}
+	]
+	var currentLocation = getRandomNumber( 0, ( latLong.length - 1 ) );
 
 	mapboxgl.accessToken = 'pk.eyJ1Ijoia3lsZWNvbnJhZCIsImEiOiJjajI4MWdhc2swMGw5MzJtbWp4ZmV2aWppIn0.wy3_dCqTbd2w33Kw9me8tw';
 	var map = new mapboxgl.Map({
 	    container: 'map',
 	    style: 'mapbox://styles/kyleconrad/cj44c4fds0jz32rm3gqr9p7ji?optimize=true',
 	    interactive: false,
-	    // center: [ -83.247, 34.998 ],
-	    center: [ currentLatLong.long, currentLatLong.lat ],
+	    // center: [ currentLatLong[0].long, currentLatLong[0].lat ],
+	    center: [ latLong[currentLocation].long, latLong[currentLocation].lat ],
 	    zoom: 13,
 	    bearing: 0
 	});
@@ -103,6 +129,10 @@ $(document).ready(function() {
 			clearInterval( mapLoaded );
 		}
 	}, 10);
+
+	function getRandomNumber( min, max ) {
+		return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
+	}
 
 
 

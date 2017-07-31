@@ -7,7 +7,7 @@
 	transition-delay: 0.5s;
 
 	.loading & {
-		@include transform(translate3d(120%,0,0));
+		@include transform(translate3d(130%,0,0));
 	}
 }
 .nav__menu-right__container {
