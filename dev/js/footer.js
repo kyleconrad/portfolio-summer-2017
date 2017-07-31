@@ -114,7 +114,6 @@ $(document).ready(function() {
 	    container: 'map',
 	    style: 'mapbox://styles/kyleconrad/cj44c4fds0jz32rm3gqr9p7ji?optimize=true',
 	    interactive: false,
-	    // center: [ currentLatLong[0].long, currentLatLong[0].lat ],
 	    center: [ latLong[currentLocation].long, latLong[currentLocation].lat ],
 	    zoom: 13,
 	    bearing: 0
@@ -214,7 +213,7 @@ $(document).ready(function() {
 
 
 	// Map Motion - Mobile Tilt
-	// TO DO: ADD DEVICE ORIENTATION PANNING
+	// TO DO: ADD DEVICE ORIENTATION PANNING - doesn't seem to work, might not be worth pursuing too much
 	// [ 'deviceorientation', 'MozOrientation', 'orientationchange' ].forEach( function( z ) {
 	// 	window.addEventListener( z, mapOrientation, false );
 	// });
@@ -457,7 +456,6 @@ $(document).ready(function() {
 		}
 
 		if ( isMobile && map.loaded() ) {
-			// $( 'canvas.mapboxgl-canvas' ).css( 'width', $( window ).width() + 'px' ).css( 'height', $( window ).height() + 'px' );
 			map.resize();
 		}
 	});

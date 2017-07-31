@@ -10,7 +10,23 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	sourcemaps = require('gulp-sourcemaps'),
 	fileinclude = require('gulp-file-include'),
-	rename = require('gulp-rename');
+	rename = require('gulp-rename'),
+
+	// Required for build
+	rimraf = require('rimraf'),
+	del = require('del'),
+	cleanCSS = require('gulp-clean-css'),
+	revise = require('gulp-revise'),
+	revReplace = require('gulp-rev-replace'),
+	concat = require('gulp-concat'),
+	uglify = require('gulp-uglify'),
+	gzip = require('gulp-gzip'),
+	usemin = require('gulp-usemin'),
+	inject = require('gulp-inject'),
+	replace = require('gulp-replace'),
+	imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
+    sitemap = require('gulp-sitemap');
 
 
 
@@ -65,7 +81,7 @@ gulp.task('html-watch', ['html-build'], function (done) {
 gulp.task('sass', function() {
     return gulp.src('./dev/sass/*.scss')
 	    .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
+        // .pipe(sass().on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dev/css'))
         .pipe(browserSync.stream());
@@ -78,6 +94,145 @@ gulp.task('sass', function() {
 // =================================================================================== //
 // Build
 // =================================================================================== //
+
+
+// Clear build directory
+gulp.task('remove', function(cb) {
+    return rimraf('./build', cb);
+});
+
+
+// Minify CSS
+gulp.task('minify', ['sass'], function() {
+	return gulp.src('./dev/css/*.css')
+		.pipe(cleanCSS({
+			compatibility: '*'
+		}))
+		.pipe(gulp.dest('./build/css'))
+		.pipe(revise())
+		.pipe(revise.write())
+		.pipe(gulp.dest('./build/css'))
+});
+
+
+// Concat and uglify JavaScript
+gulp.task('scripts', function(){
+	gulp.src('./dev/js/*.js')
+		.pipe(uglify())
+		.pipe(gulp.dest('./build/js'))
+		.pipe(revise())
+		.pipe(revise.write())
+		.pipe(gulp.dest('./build/js'));
+
+	gulp.src('./dev/js/lib/*.js')
+		.pipe(concat({
+			path: 'header.js',
+			cwd: ''
+		}))
+		.pipe(uglify({
+			mangle: false
+		}))
+		.pipe(gulp.dest('./build/js'))
+		.pipe(revise())
+		.pipe(revise.write())
+		.pipe(gulp.dest('./build/js'));
+});
+
+
+// Gzip CSS and JavaScript
+gulp.task('gzip', ['scripts', 'minify'], function() {
+	gulp.src('./build/js/*.js')
+		.pipe(gzip())
+        .pipe(gulp.dest('./build/js'));
+
+    gulp.src('./build/css/*.css')
+    	.pipe(gzip())
+    	.pipe(gulp.dest('./build/css'));
+});
+
+
+// Merge revisions into revision file
+gulp.task('merge', ['gzip'], function() {
+	return gulp.src('./build/**/*.rev')
+		.pipe(revise.merge('build'))
+		.pipe(gulp.dest('./build'))
+});
+
+
+// Build & replace HTML files, use revision file
+gulp.task('html', ['merge'], function() {
+	var manifest = gulp.src('./build/rev-manifest.json');
+
+	gulp.src('./dev/*.html')
+		.pipe(usemin())
+		.pipe(inject(gulp.src('./build/js/header.js', {
+			read: false
+		}), {
+			ignorePath: 'build',
+			removeTags: true,
+			name: 'header'
+		}))
+		.pipe(replace('/css/', '//cdn.kyleconrad.com/css/'))
+		.pipe(replace('/js/', '//cdn.kyleconrad.com/js/'))
+		.pipe(replace('/img/', '//cdn.kyleconrad.com/img/'))
+		.pipe(revReplace({
+			manifest: manifest
+		}))
+		.pipe(gulp.dest('./build'));
+
+  	gulp.src('./dev/**/*.txt')
+  		.pipe(gulp.dest('./build'));
+
+  	gulp.src('./dev/fonts/**/*')
+  		.pipe(gulp.dest('./build/fonts'));
+});
+
+
+// Build sitemap
+gulp.task('sitemap', ['html'], function() {
+	gulp.src('./build/**/*.html')
+        .pipe(sitemap({
+            siteUrl: 'https://kyleconrad.com'
+        }))
+        .pipe(gulp.dest('./build'));
+
+	del(['./build/rev-manifest.json']);
+});
+
+
+// Image minification
+gulp.task('images', function() {
+	return gulp.src('./dev/images/**/*')
+		.pipe(imagemin([
+			imagemin.jpegtran({ progressive: true }),
+			imagemin.gifsicle({ interlaced: false }),
+			imagemin.svgo({ plugins: [{
+				removeViewBox: false
+			},
+			{
+				cleanupIDs: false
+			},
+			{
+				collapseGroups: false
+			},
+			{
+				convertShapeToPath: false
+			}]
+		})], {
+				verbose: false,
+				use: [pngquant()]
+		}))
+		.pipe(gulp.dest('./build/images'))
+});
+
+
+// Main build function
+gulp.task('build', ['remove'], function(){
+	return gulp.start(
+		'sitemap',
+		'images'
+	)
+});
 
 
 
