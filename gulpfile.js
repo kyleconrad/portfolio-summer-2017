@@ -165,42 +165,51 @@ gulp.task('merge', ['gzip'], function() {
 });
 
 
-// Build & replace HTML files, use revision file
-gulp.task('html', ['merge'], function() {
+// Build & replace HTML files, use revision file, generate sitemap
+gulp.task('html', ['merge'], function(cb) {
 	var manifest = gulp.src('./build/rev-manifest.json');
 
-	gulp.src('./dev/*.html')
-		.pipe(usemin())
-		.pipe(inject(gulp.src('./build/js/header.js', {
-			read: false
-		}), {
-			ignorePath: 'build',
-			removeTags: true,
-			name: 'header'
-		}))
-		.pipe(replace('/css/', '//cdn.kyleconrad.com/css/'))
-		.pipe(replace('/js/', '//cdn.kyleconrad.com/js/'))
-		.pipe(replace('src="/images/', 'src="//cdn.kyleconrad.com/images/'))
-		.pipe(revReplace({
-			manifest: manifest
-		}))
-		.pipe(gulp.dest('./build'));
-
-  	gulp.src('./dev/**/*.txt')
-  		.pipe(gulp.dest('./build'));
-
-  	gulp.src('./dev/fonts/**/*')
-  		.pipe(gulp.dest('./build/fonts'));
+	return Promise.all([
+		new Promise(function(resolve, reject) {
+			gulp.src('./dev/*.html')
+				.pipe(usemin())
+				.pipe(inject(gulp.src('./build/js/header.js', {
+					read: false
+				}), {
+					ignorePath: 'build',
+					removeTags: true,
+					name: 'header'
+				}))
+				.pipe(replace('/css/', '//cdn.kyleconrad.com/css/'))
+				.pipe(replace('/js/', '//cdn.kyleconrad.com/js/'))
+				.pipe(replace('src="/images/', 'src="//cdn.kyleconrad.com/images/'))
+				.pipe(revReplace({
+					manifest: manifest
+				}))
+				.pipe(gulp.dest('./build'))
+				.on('end', resolve)
+			})
+		]).then(function () {
+			gulp.src('./build/**/*.html', {
+		            read: false
+		        })
+		        .pipe(sitemap({
+		            siteUrl: 'https://kyleconrad.com',
+		            changefreq: 'monthly',
+		            priority: 1
+		        }))
+		        .pipe(gulp.dest('./build'));
+		})
 });
 
 
-// Build sitemap
-gulp.task('sitemap', ['html'], function() {
-	gulp.src('./build/**/*.html')
-        .pipe(sitemap({
-            siteUrl: 'https://kyleconrad.com'
-        }))
-        .pipe(gulp.dest('./build'));
+// Cleanup files
+gulp.task('cleanup', ['html'], function() {
+	gulp.src('./dev/**/*.txt')
+  		.pipe(gulp.dest('./build'));
+
+	gulp.src('./dev/fonts/**/*')
+  		.pipe(gulp.dest('./build/fonts'));
 
 	del(['./build/rev-manifest.json', './build/**/*.rev']);
 });
@@ -235,7 +244,7 @@ gulp.task('images', function() {
 // Main build function
 gulp.task('build', ['remove'], function() {
 	return gulp.start(
-		'sitemap',
+		'cleanup',
 		'images'
 	)
 });
