@@ -251,7 +251,7 @@ gulp.task('build', ['remove'], function() {
 
 // Deployment to Digital Ocean
 gulp.task('deploy-do', function() {
-	rsync({
+	return rsync({
 		ssh: true,
 		src: 'build/',
 		dest: '162.243.216.48:/var/www/kyleconrad.com/public_html',
@@ -259,22 +259,6 @@ gulp.task('deploy-do', function() {
 		syncDest: true,
 		args: ['--verbose --progress'],
 		exclude: ['.DS_Store']
-	}, function(error, stdout, stderr, cmd) {
-		if ( error ) {
-			throwError('deploy-do', gutil.colors.red(error.message));
-		}
-		else {
-			gutil.log(stdout);
-		}
-	});
-
-	rsync({
-		ssh: true,
-		src: './.htaccess',
-		dest: '162.243.216.48:/var/www/kyleconrad.com/.htaccess',
-		recursive: false,
-		syncDest: false,
-		args: ['--verbose --progress']
 	}, function(error, stdout, stderr, cmd) {
 		if ( error ) {
 			throwError('deploy-do', gutil.colors.red(error.message));
@@ -323,7 +307,7 @@ gulp.task('deploy', function() {
 
 // Highlight error messages
 function throwError(taskName, msg) {
-	throw new gutil.PluginError({
+	new gutil.PluginError({
 		plugin: taskName,
 		message: msg
 	});
