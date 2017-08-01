@@ -121,6 +121,9 @@ $(document).ready(function() {
 
 	var mapLoaded = setInterval( function() {
 		if ( map.loaded() && $html.classList.contains( 'wf-active' ) ) {
+			document.getElementsByClassName( 'mapboxgl-ctrl-attrib' )[0].style.opacity = 0;
+			document.getElementsByClassName( 'mapboxgl-ctrl-logo' )[0].style.opacity = 0.5;
+
 			$body.classList.remove( 'loading' );
 
 			map.resize();
