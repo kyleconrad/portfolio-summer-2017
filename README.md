@@ -4,6 +4,7 @@ Static build of kyleconrad.com with Gulp.js as the build system, Sass and Bourbo
 Running local set up will install all necessary bundles and dependencies and then run a server with BrowserSync. It watches all Sass, JS, and images, then compiles and reloads accordingly.
     
     $ cd Summer\ 2017\ Design
+    $ npm install --global gulp-cli
     $ npm install
     $ gulp
 
