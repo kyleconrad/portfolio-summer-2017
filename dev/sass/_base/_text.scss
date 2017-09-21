@@ -168,7 +168,8 @@ p {
 		font-style: italic;
 	}
 	strong {
-		font-weight: bold;
+		-webkit-text-stroke: 0.75px $gray;
+		text-stroke: 0.75px $gray;
 	}
 
 
@@ -182,7 +183,8 @@ p {
 p a {
 	position: relative;
 
-	font-weight: bold;
+	-webkit-text-stroke: 0.75px $gray;
+	text-stroke: 0.75px $gray;
 
 	color: $gray;
 
