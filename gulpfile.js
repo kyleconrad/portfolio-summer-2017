@@ -260,10 +260,12 @@ gulp.task('build', ['remove'], function() {
 
 // Deployment to Digital Ocean
 gulp.task('deploy-do', function() {
+	var digoceanCreds = require('./digocean.json');
+
 	return rsync({
 		ssh: true,
 		src: 'build/',
-		dest: '162.243.216.48:/var/www/kyleconrad.com/public_html',
+		dest: digoceanCreds.server,
 		recursive: true,
 		syncDest: true,
 		args: ['--verbose --progress'],
