@@ -84,25 +84,18 @@ $scrimStops: 	0% 0%,
 }
 
 @function scrim-linear-gradient($args...) {
-	@if (length($args) == 2) {
-		@return linear-gradient(#{getColorStops(nth($args, 1), nth($args, 2))});
+	@if (length($args) == 3) {
+		@return linear-gradient(to nth($args, 1), #{getColorStops(nth($args, 2), nth($args, 3))});
 	}
-	@return linear-gradient(#{nth($args, 1)}, #{getColorStops(nth($args, 2), nth($args, 3))});
+	@return linear-gradient(to nth($args, 1), #{nth($args, 2)}, #{getColorStops(nth($args, 3), nth($args, 4))});
 }
 
-@function scrim-linear-gradient-right($args...) {
-	@if (length($args) == 2) {
-		@return linear-gradient(to right, #{getColorStops(nth($args, 1), nth($args, 2))});
-	}
-	@return linear-gradient(to right, #{nth($args, 1)}, #{getColorStops(nth($args, 2), nth($args, 3))});
+/*
+EXAMPLE USAGE:
+section {
+	background-image: scrim-linear-gradient(right, black, transparent);
 }
-
-@function scrim-linear-gradient-left($args...) {
-	@if (length($args) == 2) {
-		@return linear-gradient(to left, #{getColorStops(nth($args, 1), nth($args, 2))});
-	}
-	@return linear-gradient(to left, #{nth($args, 1)}, #{getColorStops(nth($args, 2), nth($args, 3))});
-}
+*/
 
 
 
@@ -181,3 +174,10 @@ $scrimStops: 	0% 0%,
 		@content;
 	}
 }
+
+/*
+EXAMPLE USAGE:
+@include has-nth('n + 4', 'li') {
+	border: 0;
+}
+*/
