@@ -247,8 +247,7 @@ p a {
 }
 .nav__menu-links__single {
 	&:not(.inactive):hover,
-	&:not(.inactive):active,
-	&:not(.inactive):focus {
+	&:not(.inactive):active {
 		padding-right: 0.4em;
 
 		font-style: italic;
@@ -256,8 +255,7 @@ p a {
 
 	li:first-child &:not(.inactive) {
 		&:hover,
-		&:active,
-		&:focus {
+		&:active {
 			padding-right: 0.425em;
 		}
 	}
